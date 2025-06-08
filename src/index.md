@@ -1,7 +1,7 @@
 ---
 layout: layouts/project-pwa.liquid
 totop: 1
-title: ОПА/legenda
+title: ОПА/Legenda
 makeProject: false
-project-name: legenda
+project-name: Legenda
 ---
