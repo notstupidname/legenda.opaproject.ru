@@ -136,9 +136,16 @@ body.pwa {
 
     & a {
       text-decoration-color: transparent;
+      border-radius: var(--border-radius);
+
 
       &:hover {
         text-decoration-color: var(--color-text-10);
+      }
+
+      &.checked-node {
+        outline: dashed 4px var(--color-primary);
+        outline-offset: 6px;
       }
     }
 
@@ -233,6 +240,8 @@ body.pwa {
     }
   }
 
-
+  &.design #site-header a.logo {
+    text-shadow: .1ch .1ch 4px red, .1ch -.1ch 4px blue, -.1ch 0 4px green;
+  }
 
 }
