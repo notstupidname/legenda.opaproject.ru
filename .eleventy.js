@@ -7,6 +7,7 @@ import htmlmin from "html-minifier-terser";
 import { EleventyRenderPlugin } from "@11ty/eleventy";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import path from "path";
+import markdownIt from "markdown-it";
 
 import localPlugin from "./_config/local-plugin.js";
 import config from "./src/_data/config.js";
@@ -75,6 +76,12 @@ export default function (eleventyConfig) {
 
 
   // FILTERS
+
+  // Custom markdown filter
+  const md = new markdownIt();
+  eleventyConfig.addFilter("markdown", (content) => {
+    return md.render(content);
+  });
 
   // CSS Minifier using Lightningcss
   eleventyConfig.addFilter("cssmin", function (code) {

@@ -15,24 +15,41 @@
     {% include 'partials/header-pwa.liquid' %}
     {% include 'partials/nav-pwa.liquid' %}
     <main class="stack">
-      {% comment %} <section class="banner feature color2">
-        <model-viewer 
-          src="/models/fc_250430.min.glb"
-          camera-controls
-          poster="/models/poster_color.png"
-          camera-orbit="0deg 40deg 24m"
-          field-of-view="22.98deg"
-          shadow-intensity="1"
-          shadow-softness="1"
-          environment-image="legacy"
-          exposure=".69"
-          tone-mapping="neutral"
-          ar-status="not-presenting">
-        </model-viewer>
-      </section> {% endcomment %}
-    {% for room in concept %}
-      <section id="concept-{{forloop.index}}" class="stack">
-        <h2>{{room.name}}</h2>
+      {% assign modelFile = '/models/model.min.glb' | fileExist %}
+      {% if modelFile %}
+        <section class="banner feature color2">
+          <model-viewer 
+            src="/models/model.min.glb"
+            camera-controls
+            poster="/models/poster_color.png"
+            camera-orbit="0deg 40deg 24m"
+            field-of-view="22.98deg"
+            shadow-intensity="1"
+            shadow-softness="1"
+            environment-image="legacy"
+            exposure=".69"
+            tone-mapping="neutral"
+            ar-status="not-presenting">
+          </model-viewer>
+        </section>
+      {% endif %}
+      {% if content.length > 10 %}
+      <section class="popout color-primary main-header">
+        <h1>Концепция</h1>
+      </section>
+      {{ content }}
+      {% endif %}
+      {% for room in concept %}
+      <section id="concept-{{forloop.index}}" class="stack popout">
+        {% if room.text.length > 4 %}
+        <details class="stack color1">
+          <summary><h2>{{room.name}}</h2></summary>
+          <p>{{ room.text | markdown }}</p>
+        </details>
+        {% else %}
+        <h2 class="color1">{{room.name}}</h2>
+        
+        {% endif %}
         {% for pic in room.pics %}
           <figure>
             {% if pic.imgurl != "" %}
